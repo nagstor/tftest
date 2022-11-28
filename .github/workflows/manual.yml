@@ -1,7 +1,6 @@
 # This is a basic workflow that is manually triggered
 
-name: Manual workflow
-
+name: Test Output Test
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
 on:
@@ -24,4 +23,4 @@ jobs:
     - name: print greeting
       id: print_greeting
       run: |
-        echo "The greeting is {{steps.greeting.outputs.greeting}}
+        echo "The greeting is {{steps.greeting.outputs.greeting}}"
