@@ -5,17 +5,21 @@ jobs:
   job1:
     runs-on: windows-latest
     steps:
-      -
-        name: Do Work
+      - name: Do Work
         run: |
           echo 'FAV_NUMBER=3' >> $GITHUB_OUTPUT
           echo 'FAV_COLOR=blue' >> $GITHUB_OUTPUT
         id: abc
-      -
-        name: Read output
+      - name: Read output
         run: |
           echo "${{steps.abc.outputs.FAV_NUMBER}}"
           echo "${{steps.abc.outputs.FAV_COLOR}}"
+      - name: Set color
+        id: random-color-generator
+        run: |
+            "SELECTED_COLOR=green" >> $env:GITHUB_OUTPUT
+      - name: Get color
+        run: Write-Output "The selected color is ${{ steps.random-color-generator.outputs.SELECTED_COLOR }}"
     outputs:
       fav-animal: tiger
       fav-number: ${{steps.abc.outputs.FAV_NUMBER}}
