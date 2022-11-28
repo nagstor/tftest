@@ -1,22 +1,21 @@
-# This is a basic workflow that is manually triggered
-
-name: Test Output Test
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
+name: outputs
 on:
-  workflow_dispatch:
-
+  push:
 jobs:
   job1:
     runs-on: ubuntu-latest
-    # Map a step output to a job output
-    outputs:
-      output1: ${{ steps.step1.outputs.test }}
-      output2: ${{ steps.step2.outputs.test }}
     steps:
-      - id: step1
-        run: echo "test=hello" >> $GITHUB_OUTPUT
-      - id: step2
-        run: echo "test=world" >> $GITHUB_OUTPUT
-      - id: step3
-        run: echo ${{job1.outputs.output1}} ${{job1.outputs.output2}}
+      -
+        name: Do Work
+        run: |
+          echo '::set-output name=FAV_NUMBER::3'
+          echo '::set-output name=FAV_COLOR::blue'
+        id: abc
+      -
+        name: Read output
+        run: |
+          echo "${{steps.abc.outputs.FAV_NUMBER}}"
+          echo "${{steps.abc.outputs.FAV_COLOR}}"
+    outputs:
+      fav-animal: tiger
+      fav-number: ${{steps.abc.outputs.FAV_NUMBER}}
