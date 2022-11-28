@@ -17,10 +17,10 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - name: Send greeting
-      id: greeting
+      id: greeting_text
       run: |
-        echo "greeting=Hello Woerld" >> $GITHUB_OUTPUT
+         echo "message=Hello World" >> $GITHUB_OUTPUT
     - name: print greeting
       id: print_greeting
       run: |
-        echo "The greeting is {{steps.greeting.outputs.greeting}}"
+        echo "The greeting is ${{ steps.greeting_text.outputs.greeting }}"
